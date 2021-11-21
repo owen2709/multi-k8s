@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  -docker build -t owen2709/react test -f ./client/Dockerfile.dev ./client
+
+script:
+  -docker run owen2709/react-test npm test -- --coverage
+
+after_sucess:
+  - docker build -t owen2709/multi-client ./client
+- docker build -t owen2709/multi-nginx ./nginx
+- docker build -t owen2709/multi-server ./server
+- docker build -t owen2709/multi-worker ./worker
+#Take those images and push them to docker hub

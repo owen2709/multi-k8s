@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  -docker build -t owen2709/react test -f ./client/Dockerfile.dev ./client
+  - docker build -t owen2709/react test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true owen2709/react-test npm test

@@ -1,3 +1,5 @@
+sudo: required
+language: generic
 services:
   - docker
 
@@ -5,7 +7,7 @@ before_install:
   - docker build -t owen2709/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true owen2709/react-test npm test
+  -  - docker run USERNAME/react-test npm test -- --coverage
 
 after_success:
   - docker build -t owen2709/multi-client ./client

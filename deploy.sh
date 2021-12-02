@@ -1,16 +1,16 @@
-docker build -t owen2709/multi-client-k8s:latest -t owen2709/multi-client-k8s:$SHA -f ./client/Dockerfile ./client
-docker build -t owen2709/multi-server-k8s-pgfix:latest -t owen2709/multi-server-k8s-pgfix:$SHA -f ./server/Dockerfile ./server
-docker build -t owen2709/multi-worker-k8s:latest -t owen2709/multi-worker-k8s:$SHA -f ./worker/Dockerfile ./worker
+docker build -t stephengrider/multi-client:latest -t stephengrider/multi-client:$SHA -f ./client/Dockerfile ./client
+docker build -t stephengrider/multi-server:latest -t stephengrider/multi-server:$SHA -f ./server/Dockerfile ./server
+docker build -t stephengrider/multi-worker:latest -t stephengrider/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
-docker push owen2709/multi-client-k8s:latest
-docker push owen2709/multi-server-k8s-pgfix:latest
-docker push owen2709/multi-worker-k8s:latest
+docker push stephengrider/multi-client:latest
+docker push stephengrider/multi-server:latest
+docker push stephengrider/multi-worker:latest
 
-docker push owen2709/multi-client-k8s:$SHA
-docker push owen2709/multi-server-k8s-pgfix:$SHA
-docker push owen2709/multi-worker-k8s:$SHA
+docker push stephengrider/multi-client:$SHA
+docker push stephengrider/multi-server:$SHA
+docker push stephengrider/multi-worker:$SHA
 
 kubectl apply -f k8s
-kubectl set image deployments/server-deployment server=owen2709/multi-server-k8s-pgfix:$SHA
-kubectl set image deployments/client-deployment client=owen2709/multi-client-k8s:$SHA
-kubectl set image deployments/worker-deployment worker=owen2709/multi-worker-k8s:$SHA
+kubectl set image deployments/server-deployment server=stephengrider/multi-server:$SHA
+kubectl set image deployments/client-deployment client=stephengrider/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=stephengrider/multi-worker:$SHA
